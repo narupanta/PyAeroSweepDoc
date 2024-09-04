@@ -1,6 +1,7 @@
-# Welcome to MkDocs
+# Welcome to PyAeroSweep
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+## About
+PyAeroSweep is a multi-functional tool that performs aerodynamic sweeps of airfoils and wings using high-fidelity CFD methods.
 
 ## Commands
 

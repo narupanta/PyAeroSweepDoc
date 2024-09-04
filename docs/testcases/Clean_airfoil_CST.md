@@ -1,4 +1,4 @@
-# Case: Clean Airfoile CST
+# Clean Airfoile CST
 
 [Description here]
 
