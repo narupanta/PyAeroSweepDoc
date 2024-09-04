@@ -4,7 +4,6 @@ theme:
 
 nav:
   - Home: index.md
-  - About PyAeroSweep: about.md
   - Topics:
       - Installation: installation.md
       - Usage: usage.md
