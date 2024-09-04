@@ -1,0 +1,16 @@
+site_name: PyAeroSweep
+theme:
+  name: 'rtd-dropdown'
+
+nav:
+  - Home: index.md
+  - About PyAeroSweep: about.md
+  - Topics:
+      - Installation: installation.md
+      - Usage: usage.md
+      - Structure: structure.md
+  - Test Cases:
+    - Clean_airfoil_CST: testcases\Clean_airfoil_CST.md
+    - Clean_airfoil_Full: testcases\Clean_airfoil_Full.md
+    - Flapped_airfoil_full: testcases\Flapped_airfoil_full.md
+    - Full_3D_Wing: testcases\Full_3D_Wing.md
