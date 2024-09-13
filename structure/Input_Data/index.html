@@ -4,21 +4,21 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Code Structure - PyAeroSweep</title>
-    <link rel="stylesheet" href="../css/theme.css" />
-    <link rel="stylesheet" href="../css/theme_extra.css" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Input_Data.py - PyAeroSweep</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Code Structure";
-        var mkdocs_page_input_path = "structure.md";
+        var mkdocs_page_name = "Input_Data.py";
+        var mkdocs_page_input_path = "structure\\Input_Data.md";
         var mkdocs_page_url = null;
       </script>
     
     <!--[if lt IE 9]>
-      <script src="../js/html5shiv.min.js"></script>
+      <script src="../../js/html5shiv.min.js"></script>
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
       <script>hljs.highlightAll();</script> 
@@ -30,9 +30,9 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href=".." class="icon icon-home"> PyAeroSweep
+          <a href="../.." class="icon icon-home"> PyAeroSweep
         </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
   </form>
 </div>
@@ -40,39 +40,53 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../installation/">Installation</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../usage/">Usage</a>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Code Strucure</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="Core/">Core</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../Core/">Core</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="Methods/">Methods</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../Methods/">Methods</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="Components/">Components</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../Components/">Components</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="Input_Data/">Input_Data.py</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Input_Data.py</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#solver-settings">Solver Settings</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#freestream-settings">Freestream Settings</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#geometry-settings">Geometry Settings</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mesh-settings">Mesh Settings</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#packing-all-the-inputs">Packing all the inputs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary-code-example">Summary Code Example</a>
+    </li>
+    </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="Run_aero/">Run_aerodynamic_analysis.py</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../Run_aero/">Run_aerodynamic_analysis.py</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Test Cases</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../testcases/Clean_airfoil_CST/">Clean_airfoil_CST</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../testcases/Clean_airfoil_CST/">Clean_airfoil_CST</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../testcases/Clean_airfoil_Full/">Clean_airfoil_Full</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../testcases/Clean_airfoil_Full/">Clean_airfoil_Full</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../testcases/Flapped_airfoil_full/">Flapped_airfoil_full</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../testcases/Flapped_airfoil_full/">Flapped_airfoil_full</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../testcases/Full_3D_Wing/">Full_3D_Wing</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../testcases/Full_3D_Wing/">Full_3D_Wing</a>
                   </li>
               </ul>
       </div>
@@ -82,14 +96,15 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="..">PyAeroSweep</a>
+          <a href="../..">PyAeroSweep</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Code Structure</li>
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Code Strucure</li>
+      <li class="breadcrumb-item active">Input_Data.py</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -98,11 +113,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="code-structure">Code Structure</h1>
-<h2 id="core">Core</h2>
-<h2 id="methods">Methods</h2>
-<h2 id="components">Components</h2>
-<h2 id="input_datapy">Input_Data.py</h2>
+                <h2 id="input_datapy">Input_Data.py</h2>
 <p>In this file, we can setup the simulation by inputting various kinds of variables such as:</p>
 <p><code>working_dir</code> which will be changed according to the user's workspace</p>
 <h3 id="solver-settings">Solver Settings</h3>
@@ -142,7 +153,8 @@ Solver_settings.warmstart = 'YES'
 Solver_settings.config_file = 'Run_airfoil_template.cfg'
 </code></pre>
 <h3 id="freestream-settings">Freestream Settings</h3>
-<p>The following code block is the setup of Freestream. The air speed (in Mach), altitude (meters) and angle of attack (degrees) can be set as following.</p>
+<p>The following code block is the setup of Freestream. The air speed (in Mach), altitude (meters) and angle of attack (degrees) can be set as following.
+In file run_SU2.py, there will be a loop for every possible cases regarding the Freestream Settings </p>
 <pre><code class="language-python">Freestream = Data()
 Freestream.Mach             = np.array([0.21,0.25])
 Freestream.Altitude         = np.array([0,2000])                 # in meters
@@ -424,6 +436,10 @@ def Input_data():
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Components/" class="btn btn-neutral float-left" title="Components"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Run_aero/" class="btn btn-neutral float-right" title="Run_aerodynamic_analysis.py">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -445,14 +461,18 @@ def Input_data():
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../Components/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Run_aero/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "..";</script>
-    <script src="../js/theme_extra.js"></script>
-    <script src="../js/theme.js"></script>
-      <script src="../search/main.js"></script>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
     <script>
         jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);
