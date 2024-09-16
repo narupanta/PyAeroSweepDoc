@@ -1,224 +1,308 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  
-  <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Clean_airfoil_CST - PyAeroSweep</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
-
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "Clean_airfoil_CST";
-    var mkdocs_page_input_path = "testcases\\Clean_airfoil_CST.md";
-    var mkdocs_page_url = null;
-  </script>
-  
-  <script src="../../js/jquery-2.1.1.min.js" defer></script>
-  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script> 
-  
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Clean_airfoil_CST - PyAeroSweep</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Clean_airfoil_CST";
+        var mkdocs_page_input_path = "testcases\\Clean_airfoil_CST.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
 
   <div class="wy-grid-for-nav">
-
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> PyAeroSweep</a>
-        <div role="search">
+          <a href="../.." class="icon icon-home"> PyAeroSweep
+        </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="tocbase current">
-    
-    
-      
-
-
-  <li class="navtree toctree-l1 inactive">
-    <a class="" href="../..">Home</a>
-  </li>
-    
-      
-  <li class="navtree toctree-l1 label">
-    <p class="caption">Topics</p>
-  </li>
-
-
-  
-
-  
-    <li class="navtree toctree-l1 group">
-      <ul class="navtree subnav-l1 current">
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../../installation/">Installation</a>
-  </li>
-        
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../../usage/">Usage</a>
-  </li>
-        
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../../structure/">Structure</a>
-  </li>
-        
-      </ul>
-    </li>
-    
-      
-  <li class="navtree toctree-l1 label">
-    <p class="caption">Test Cases</p>
-  </li>
-
-
-  
-
-  
-    <li class="navtree toctree-l1 group">
-      <ul class="navtree subnav-l1 current">
-          
-
-
-  
-    
-    <li class="navtree toctree-l2 page current">
-      <a class="current" href="./">
-        Clean_airfoil_CST
-          <span class="toctree-expand"></span>
-      </a>
-    </li>
-    
-      
-
-  <li class="toctree-l2 current with-children">
-    <a href="#clean-airfoile-cst">
-      Clean Airfoile CST
-      <span class="toctree-expand"></span>
-    </a>
-  </li>
-
-
-
-  <li class="toctree-l2 current">
-    <ul class="subnav-l2 current">
-    
-      
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#inputs">Inputs</a>
-        </li>
-    
-      
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#results">Results</a>
-        </li>
-    
-      
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#explanation">Explanation</a>
-        </li>
-    
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../usage/">Usage</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Code Strucure</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../structure/Core/">Core</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../structure/Methods/">Methods</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../structure/Components/">Components</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../structure/Input_Data/">Input_Data.py</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../structure/Run_aero/">Run_aerodynamic_analysis.py</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Geometry Definition</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../structure/Geometry/PARSEC_Definition/">PARSEC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../structure/Geometry/CST_Definition/">CST</a>
+                </li>
     </ul>
-  </li>
-
-
-  
-        
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../Clean_airfoil_Full/">Clean_airfoil_Full</a>
-  </li>
-        
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../Flapped_airfoil_full/">Flapped_airfoil_full</a>
-  </li>
-        
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../Full_3D_Wing/">Full_3D_Wing</a>
-  </li>
-        
-      </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test Cases</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Clean_airfoil_CST</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#inputs">Inputs</a>
     </li>
-    
-  </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#results">Results</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#explanation">Explanation</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Clean_airfoil_Full/">Clean_airfoil_Full</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Flapped_airfoil_full/">Flapped_airfoil_full</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Full_3D_Wing/">Full_3D_Wing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Others</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../other/">Others</a>
+                  </li>
+              </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">PyAeroSweep</a>
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">PyAeroSweep</a>
+        
       </nav>
-
-      
       <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../..">Docs</a> &raquo;</li>
-    
-      
-        
-          <li>Test Cases &raquo;</li>
-        
-      
-    
-    <li>Clean_airfoil_CST</li>
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Test Cases</li>
+      <li class="breadcrumb-item active">Clean_airfoil_CST</li>
     <li class="wy-breadcrumbs-aside">
-      
     </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
-            <div class="section">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
               
-                <h1 id="clean-airfoile-cst">Clean Airfoile CST</h1>
-<p>[Description here]</p>
-<h2 id="inputs">Inputs</h2>
-<p>[describe the input for the simulation here]</p>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+                <h1 id="clean-airfoil-cst">Clean Airfoil CST</h1>
+<p>Clean Airfoil CST test case is the simulation of the air flow through the clean airfoil (without flaps, just airfoil). CST (Class-Shape Transformation) is one way to define the geometry of the airfoil. For futher information follow this link <a href="https://mdolab-pygeo.readthedocs-hosted.com/en/latest/cst_tutorial.html">CST Airfoil Geometry</a></p>
+<p>Steps:</p>
+<ol>
+<li>Setting the input for the simulation<ul>
+<li>The geometry is defined using CST</li>
 </ul>
+</li>
+<li>In function <code>run_aerodynamic_analysis</code>, <ol>
+<li>Generate the file for geometry and mesh the geometry</li>
+<li>Solve using SU2</li>
+<li>Read results from the runtime log and save them as csv and vtu</li>
+<li></li>
+</ol>
+</li>
+</ol>
+<h2 id="inputs">Inputs</h2>
+<pre><code class="language-python">
+import numpy as np
+from Core.Data                          import Data
+from Components.Solver                  import Solver
+from Components.Geometry                import Geometry
+from Components.Geometry.Wing.Segment   import Segment
+from Components.Mesh                    import Mesh
+
+from Run_aerodynamic_analysis import run_aerodynamic_analysis
+
+
+def Input_data():
+
+    working_dir   = r&quot;/home/doktorand/Software/PyAeroSweep-Stan-V3/PyAeroSweep/Test_Cases/Clean_airfoil_CST&quot; 
+
+# ------------------------------- SOLVER SETTINGS ----------------------------------------------------------- #
+#
+
+    Solver_settings = Solver()
+
+    Solver_settings.working_dir = working_dir
+
+    Solver_settings.name = 'SU2'                 # SU2 or Fluent
+
+    # Solver dimensions
+    # 2d   or 3d        for SU2 
+    Solver_settings.dimensions = '2d'            
+
+    # Only available for SU2 in 3D
+    # defines half od the shape or a full shape analysis (Only symmetric works for now)
+    Solver_settings.symmetric = True             
+
+    # SST or SA for SU2
+    Solver_settings.turbulence_model = 'SST'
+
+    # Number of processors
+    Solver_settings.processors = 4
+
+    # Cauchy convergence criteria
+    # Could be either LIFT or DRAG
+    Solver_settings.monitor          = &quot;LIFT&quot;
+    Solver_settings.tolerance        = 5e-7      
+    Solver_settings.max_iterations   = 100
+    Solver_settings.save_frequency   = 100
+
+    # Warm start
+    # YES or NO
+    Solver_settings.warmstart = 'YES'
+
+    # SU2 reference config file name which will be updated
+    Solver_settings.config_file = 'Run_airfoil_template.cfg'
+
+
+
+# ------------------------------- FREESTREAM SETTINGS ------------------------------------------------------- #
+#
+    Freestream = Data()
+    Freestream.Mach             = np.array([0.21,0.25])
+    Freestream.Altitude         = np.array([0,2000])                 # in meters
+    Freestream.Angle_of_attack  = np.array([0.0,3.0,5.0])               # in degrees
+
+
+
+
+# ------------------------------- GEOMETRY SETTINGS --------------------------------------------------------- #
+#
+    Geometry_data = Geometry()
+
+    # Geometry to analyze
+    ''' Could be airfoil or wing
+        Airfoils can be parametrically defined using the PARSEC methods
+        Wings are defined only using the existing CAD file and work either for
+        straight tapered wings with or without the kink'''
+
+    Geometry_data.type = 'airfoil'
+
+    # Reference values
+    Geometry_data.reference_values = {
+        &quot;Area&quot;   : 2.62,
+        &quot;Length&quot; : 2.62,
+        &quot;Depth&quot;  : 1,
+        &quot;Point&quot;  : [0.25*2.62,0,0]              # reference point about which the moment is taken
+    }
+
+    segment = Segment()
+    segment.tag                = 'section_1'
+    segment.chord              = 2.62
+    segment.Airfoil.files      = {
+        &quot;upper&quot; : &quot;main_airfoil_upper_1.dat&quot;,
+        &quot;lower&quot; : &quot;main_airfoil_lower_1.dat&quot;
+    }
+    segment.Airfoil.CST = {
+                    &quot;upper&quot; :[0.20095, 0.26864, 0.10933, 0.29307,\
+                              0.12099, 0.21197, 0.18002, 0.18408],                    
+                    &quot;lower&quot; :[-0.20095, 0.05433, -0.46373, 0.25546,\
+                              -0.40375, 0.01032, -0.14109, -0.11217],    
+                    &quot;N1 upper&quot; : 0.5,
+                    &quot;N1 lower&quot; : 0.5,
+                    &quot;N2 upper&quot; : 1.0,
+                    &quot;N2 lower&quot; : 1.0,
+                    &quot;yte upper&quot; : 0.001,
+                    &quot;yte lower&quot; : -0.001 
+}
+    Geometry_data.Segments.append(segment)
+
+    segment.plot_airfoil = True
+
+
+# ------------------------------- MESH SETTINGS ---------------------------------------------------------------- #
+#
+
+    Mesh_data = Mesh()
+
+    # Flag to mesh the shape or not
+    Mesh_data.meshing    = True
+
+    # Mesh type
+    Mesh_data.structured = True
+
+    # Defined the OS in which Pointwise is used
+    # WINDOWS or Linux
+    Mesh_data.operating_system = 'Linux'
+
+    # Pointwise tclsh directory used in Windows
+    Mesh_data.tclsh_directory =  r&quot;/home/doktorand/Fidelity/Pointwise/Pointwise2022.1&quot; 
+
+    # Desired Y+ value
+    Mesh_data.Yplus = 1.0
+
+    # Define the Glyph template to use for meshing
+    Mesh_data.glyph_file = &quot;mesh_clean_airfoil_SU2.glf&quot;
+
+    # Mesh filename for either the newly generated mesh or an eisting mesh
+    Mesh_data.filename = 'su2meshEx.su2'
+
+    # Define far-field 
+    Mesh_data.far_field = 100 * Geometry_data.reference_values[&quot;Length&quot;]
+
+
+    Mesh_data.airfoil_mesh_settings = {
+        &quot;LE_spacing&quot;             : 0.001,                       # Airfoil leading edge spacing
+        &quot;TE_spacing&quot;             : 0.0005,                      # Airfoil trailing edge spacing
+        &quot;flap_cluster&quot;           : 0.005,
+        &quot;connector dimensions&quot;   : [200, 200, 8],     #         &quot;connector_dimensions&quot;: [200, 120, 150, 150, 70, 25, 8, 8],
+        &quot;number of normal cells&quot; : 230
+    }
+
+
+# ----------------------------------------------------------------------------------------------------------------------------- #
+#
+    # Pack all inputs
+    Input = Data()
+    Input.Solver        = Solver_settings
+    Input.Freestream    = Freestream
+    Input.Geometry      = Geometry_data
+    Input.Mesh          = Mesh_data
+
+
+    return Input
+
+
+if __name__ == '__main__':
+
+    Input = Input_data()
+    run_aerodynamic_analysis(Input)
+</code></pre>
 <h2 id="results">Results</h2>
 <pre><code>mkdocs.yml    # The configuration file.
 docs/
@@ -228,29 +312,21 @@ docs/
 <h2 id="explanation">Explanation</h2>
               
             </div>
-          </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../structure/Geometry/CST_Definition/" class="btn btn-neutral float-left" title="CST"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../Clean_airfoil_Full/" class="btn btn-neutral float-right" title="Clean_airfoil_Full">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../../structure/" class="btn btn-neutral" title="Structure"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <!-- Copyright etc -->
-    
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-      
+          
         </div>
       </div>
 
@@ -258,20 +334,28 @@ docs/
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../../structure/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../Clean_airfoil_Full/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../structure/Geometry/CST_Definition/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Clean_airfoil_Full/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
-    <script>var base_url = '../..';</script>
-    <script src="../../js/theme.js" defer></script>
-      <script src="../../search/main.js" defer></script>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
 
 </body>
 </html>

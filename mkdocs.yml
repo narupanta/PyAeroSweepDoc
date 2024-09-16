@@ -1,15 +1,30 @@
 site_name: PyAeroSweep
 theme:
-  name: 'rtd-dropdown'
+  name: 'readthedocs'
+
+markdown_extensions:
+    - mdx_math
+
+extra_javascript:
+    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML
 
 nav:
   - Home: index.md
-  - Topics:
-      - Installation: installation.md
-      - Usage: usage.md
-      - Structure: structure.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - Code Strucure:
+    - Core: structure\Core.md
+    - Methods: structure\Methods.md
+    - Components: structure\Components.md
+    - Input_Data.py : structure\Input_Data.md
+    - Run_aerodynamic_analysis.py: structure\Run_aero.md
+    - Geometry Definition: 
+      - PARSEC: structure\Geometry\PARSEC_Definition.md
+      - CST: structure\Geometry\CST_Definition.md
   - Test Cases:
     - Clean_airfoil_CST: testcases\Clean_airfoil_CST.md
     - Clean_airfoil_Full: testcases\Clean_airfoil_Full.md
     - Flapped_airfoil_full: testcases\Flapped_airfoil_full.md
     - Full_3D_Wing: testcases\Full_3D_Wing.md
+  - Others:
+    - Others: other.md
