@@ -44,10 +44,6 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#about">About</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#project-layout">Project layout</a>
-    </li>
     </ul>
                 </li>
               </ul>
@@ -71,6 +67,14 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="structure/Run_aero/">Run_aerodynamic_analysis.py</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" >Geometry Definition</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="structure/Geometry/PARSEC_Definition/">PARSEC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="structure/Geometry/CST_Definition/">CST</a>
+                </li>
+    </ul>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Test Cases</span></p>
               <ul>
@@ -81,6 +85,11 @@
                   <li class="toctree-l1"><a class="reference internal" href="testcases/Flapped_airfoil_full/">Flapped_airfoil_full</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="testcases/Full_3D_Wing/">Full_3D_Wing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Others</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="other/">Others</a>
                   </li>
               </ul>
       </div>
@@ -109,19 +118,45 @@
                 <h1 id="welcome-to-pyaerosweep">Welcome to PyAeroSweep</h1>
 <h2 id="about">About</h2>
 <p>PyAeroSweep is a multi-functional tool that performs aerodynamic sweeps of airfoils and wings using high-fidelity CFD methods.</p>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+<p>PyAeroSweep can perform a range of pre-processing and simulation tasks:</p>
+<ol>
+<li>Generation of airfoil and wing geometries of various kinds:<ul>
+<li><strong>Airfoils</strong><ul>
+<li>Airfoils can be generated using PARSEC of CST parametrization methods</li>
+<li>A droop nose, plain, or slotted flaps can be defined for given airfoils</li>
+<li>Airfoil coordinates are imported in typical text formats</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
+</li>
+<li><strong>Wings</strong><ul>
+<li>Generation of piesewise wing planforms using the Pygeo framework</li>
+<li>Wing planforms are exported in the .igs format</li>
+<li>Only clean planform capabilities are available</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Automatic geometry meshing using Pointwise:<ul>
+<li>Meshing is performed using pre-defined templates that can be parameterically tuned for a particular problem</li>
+<li>Viscous layers are added for unstructured meshes using TREX</li>
+<li><strong>Airfoils</strong><ul>
+<li>Structured and unstructured mesh options available</li>
+<li>Meshing of externally imported airfils is possible</li>
+</ul>
+</li>
+<li><strong>Wings</strong><ul>
+<li>Meshes the wing surface using the Pointwise automatic mesh generation method</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>CFD solution using SU2:<ul>
+<li>At the moment, can only run RANS solutions. Euler solutions are planned</li>
+<li>3D solutions for wings are currently available only with a symmetry plane</li>
+<li>angle-of-attack, altitude, and Mach number sweeps are possible</li>
+<li>The tool can run a similar mesh created externally</li>
+</ul>
+</li>
+</ol>
               
             </div>
           </div><footer>
@@ -158,6 +193,7 @@ docs/
     <script>var base_url = ".";</script>
     <script src="js/theme_extra.js"></script>
     <script src="js/theme.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML"></script>
       <script src="search/main.js"></script>
     <script>
         jQuery(function () {
@@ -170,5 +206,5 @@ docs/
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2024-09-13 07:26:07.723604+00:00
+Build Date UTC : 2024-09-16 16:35:18.029613+00:00
 -->
