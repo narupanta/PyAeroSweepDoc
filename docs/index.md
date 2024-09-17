@@ -1,6 +1,9 @@
 # Welcome to PyAeroSweep
 
 ## About
+
+[Repository](https://github.com/stankarpuktubs/PyAeroSweep)
+
 PyAeroSweep is a multi-functional tool that performs aerodynamic sweeps of airfoils and wings using high-fidelity CFD methods.
 
 PyAeroSweep can perform a range of pre-processing and simulation tasks:

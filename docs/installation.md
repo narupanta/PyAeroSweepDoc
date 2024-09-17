@@ -8,4 +8,4 @@ The following set of tools must be installed to enable all capabilities:
 * OpenMPI [https://www.open-mpi.org/](https://www.open-mpi.org/)
 
 # Installation
-Clone the repository or download repository to the folder of your choice
+Clone the [Repository](https://github.com/stankarpuktubs/PyAeroSweep) or download repository to the folder of your choice
