@@ -53,12 +53,6 @@
               </ul>
               <p class="caption"><span class="caption-text">Code Strucure</span></p>
               <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../Core/">Core</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../Methods/">Methods</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../Components/">Components</a>
-                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Input_Data/">Input_Data.py</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Run_aerodynamic_analysis.py</a>
@@ -66,8 +60,6 @@
     <li class="toctree-l2"><a class="reference internal" href="#run_su2py">run_SU2.py</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#solve">solve()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#run_su2_config">run_SU2_config()</a>
     </li>
         </ul>
     </li>
@@ -88,9 +80,17 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../testcases/Clean_airfoil_Full/">Clean_airfoil_Full</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../testcases/Flapped_airfoil_full/">Flapped_airfoil_full</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../testcases/Flapped_airfoil_CST/">Flapped_airfoil_CST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../testcases/Flapped_airfoil_PARSEC/">Flapped_airfoil_CST</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../testcases/Full_3D_Wing/">Full_3D_Wing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../testcases/LE_TE_flaps/">LE_TE</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../testcases/Mesh_and_Run/">Mesh and run</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../testcases/Only_RANS/">Only RANS (solver)</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Others</span></p>
@@ -155,12 +155,6 @@
 <p>Read results and store it in excel</p>
 </li>
 </ol>
-<h3 id="run_su2_config">run_SU2_config()</h3>
-<p>Steps 
-1. get standard atmospheric and reference properties and reynold number</p>
-<p>Note: CST and Parsec are methods for parameterizing the airfoil</p>
-<p>Note: Components/Wing/Geometry/Segment/create_Parsec</p>
-<p>Note: Find the part the show the plot of the airfoil and save it as pdf -&gt; it's in the create_parsec or create_cst part</p>
               
             </div>
           </div><footer>
