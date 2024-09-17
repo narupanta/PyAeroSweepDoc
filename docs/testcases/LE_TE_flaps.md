@@ -1,13 +1,13 @@
-# Clean Airfoil CST
+# Airfoil including trailing edge device and leading edge device
 
-Clean Airfoil CST test case is the simulation of the air flow through the clean airfoil (without flaps, just airfoil). CST (Class-Shape Transformation) is one way to define the geometry of the airfoil. For futher information follow this link [CST Airfoil Geometry](https://mdolab-pygeo.readthedocs-hosted.com/en/latest/cst_tutorial.html)
+Clean Airfoil Full test case is the simulation of the air flow through the clean airfoil (without flaps, just airfoil). In this case, PARSEC airfoil parameterized method is used to create the airfoil geometry.
 
-![CST airfoil](./geometry/cst_airfoil.png)
+![LE + TE airfoil](./geometry/LE_TE.png)
 
-Steps:
+**Steps:**
 
 1. Setting the input for the simulation
-    * The geometry is defined using CST
+    * The geometry is defined using PARSEC
 2. In function `run_aerodynamic_analysis`, 
     1. Generate the file for geometry and mesh the geometry
     2. Solve using SU2
@@ -17,6 +17,7 @@ Steps:
 ## Inputs
 
 ```python
+import os
 import numpy as np
 from Core.Data                          import Data
 from Components.Solver                  import Solver
@@ -29,7 +30,7 @@ from Run_aerodynamic_analysis import run_aerodynamic_analysis
 
 def Input_data():
 
-    working_dir   = r"/home/doktorand/Software/PyAeroSweep-Stan-V3/PyAeroSweep/Test_Cases/Clean_airfoil_CST" 
+    working_dir = r"/home/doktorand/Software/PyAeroSweep-Stan-V3/PyAeroSweep/Test_Cases/LE_TE_flaps" 
 
 # ------------------------------- SOLVER SETTINGS ----------------------------------------------------------- #
 #
@@ -102,26 +103,47 @@ def Input_data():
 
     segment = Segment()
     segment.tag                = 'section_1'
+    segment.spanwise_location  = 0 
     segment.chord              = 2.62
     segment.Airfoil.files      = {
         "upper" : "main_airfoil_upper_1.dat",
         "lower" : "main_airfoil_lower_1.dat"
     }
-    segment.Airfoil.CST = {
-                    "upper" :[0.20095, 0.26864, 0.10933, 0.29307,\
-                              0.12099, 0.21197, 0.18002, 0.18408],                    
-                    "lower" :[-0.20095, 0.05433, -0.46373, 0.25546,\
-                              -0.40375, 0.01032, -0.14109, -0.11217],    
-                    "N1 upper" : 0.5,
-                    "N1 lower" : 0.5,
-                    "N2 upper" : 1.0,
-                    "N2 lower" : 1.0,
-                    "yte upper" : 0.001,
-                    "yte lower" : -0.001 
-}
-    Geometry_data.Segments.append(segment)
+    segment.Airfoil.PARSEC     = {
+                                    "rle"        : 0.0084,                      # Main airfoil LE radius
+                                    "x_pre"      : 0.458080577545180,           # x-location of the crest on the pressure side
+                                    "y_pre"      : -0.04553160030118,           # y-location of the crest on the pressure side  
+                                    "d2ydx2_pre" : 0.554845554794938,           # curvature of the crest on the pressure side  
+                                    "th_pre"     : -9.649803736,                # trailing edge angle on the pressure side [deg]
+                                    "x_suc"      : 0.46036604,                  # x-location of the crest on the suction side 
+                                    "y_suc"      : 0.06302395539,               # y-location of the crest on the suction side
+                                    "d2ydx2_suc" : -0.361421420,                # curvature of the crest on the suction side
+                                    "th_suc"     : -12.391677695858,            # trailing edge angle on the suction side [deg]
+                                    "yte upper"  : 0.002,
+                                    "yte lower"  : -0.002
+    }
+
+    segment.TrailingEdgeDevice.type   = 'Plain'
+    segment.TrailingEdgeDevice.PARSEC = {
+        "delta_f"    : 25,              # flap deflection [deg]
+        "cf_c"       : 0.7,            # flap chord ratio
+        "d_cf_up"    : 0.03,            # flap offset from the hinge on the upper surface 
+        "d_cf_low"   : 0.03,            # shroud lip extent ratio wrt the flap  
+        "w_con_seal" : 0.5              # conical parameter for the flap seal
+    } 
+
+    segment.LeadingEdgeDevice.type   = 'Droop'
+    segment.LeadingEdgeDevice.PARSEC = {
+        "delta_s"    : 25,              # droop nose deflection [deg]
+        "cs_c"       : 0.15,             # droop nose chord ratio
+        "d_cs_up"    : 0.03,            # droop nose offset from the hinge on the upper surface 
+        "d_cs_low"   : 0.03,            # shroud lip extent ratio wrt the flap  
+        "w_con_seal" : 1.0              # conical parameter for the droop nose seal
+    } 
 
     segment.plot_airfoil = True
+
+    Geometry_data.Segments.append(segment)
 
 
 # ------------------------------- MESH SETTINGS ---------------------------------------------------------------- #
@@ -183,6 +205,7 @@ if __name__ == '__main__':
     run_aerodynamic_analysis(Input)
 ```
 
-## Results
+## Result
+
 The magnitude of momentum at altitude 2000 m, speed = 0.25 Mach and angle of attack 3 degree.
-![Clean CST airfoil result](./results/Clean_CST_Momentum_Alt2000_MachQuarter_AoA3.jpg)
+![LE + TE airfoil result](./results/LETE_Alt2000_Mach25in100_AoA3.jpg)

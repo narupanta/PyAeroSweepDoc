@@ -23,18 +23,3 @@ Steps
 3. Run the solver parallelly using MPI, results will be written in SU2_output.log
 
 4. Read results and store it in excel
-
-
-### run_SU2_config()
-Steps 
-1. get standard atmospheric and reference properties and reynold number
-
-
-
-Note: CST and Parsec are methods for parameterizing the airfoil
-
-
-
-Note: Components/Wing/Geometry/Segment/create_Parsec
-
-Note: Find the part the show the plot of the airfoil and save it as pdf -> it's in the create_parsec or create_cst part

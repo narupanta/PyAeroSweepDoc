@@ -1,10 +1,10 @@
-# Clean Airfoil Full
+# Flapped Airfoil PARSEC
 
-Clean Airfoil Full test case is the simulation of the air flow through the clean airfoil (without flaps, just airfoil). In this case, PARSEC airfoil parameterization method is used to create the airfoil geometry.
+Flapped Airfoil PARSEC test case is the simulation of the air flow through the flapped airfoil. PARSEC airfoil parameterization method is used to create the airfoil geometry (both main and flap).
 
-![PARSEC airfoil](./geometry/parsec_airfoil.png)
+![Flapped CST airfoil](./geometry/flapped_parsec_airfoil.png)
 
-**Steps:**
+Steps:
 
 1. Setting the input for the simulation
     * The geometry is defined using PARSEC
@@ -15,7 +15,6 @@ Clean Airfoil Full test case is the simulation of the air flow through the clean
 3. Visualize the result using Paraview
 
 ## Inputs
-
 ```python
 import numpy as np
 from Core.Data                          import Data
@@ -26,10 +25,9 @@ from Components.Mesh                    import Mesh
 
 from Run_aerodynamic_analysis import run_aerodynamic_analysis
 
-
 def Input_data():
 
-    working_dir   = r"/home/doktorand/Software/PyAeroSweep-Stan-V3/PyAeroSweep/Test_Cases/Clean_airfoil_Full" 
+    working_dir   = r"/home/doktorand/Software/PyAeroSweep-Stan-V3/PyAeroSweep/Test_Cases/Flapped_airfoil_full"  
 
 # ------------------------------- SOLVER SETTINGS ----------------------------------------------------------- #
 #
@@ -52,7 +50,7 @@ def Input_data():
     Solver_settings.turbulence_model = 'SST'
 
     # Number of processors
-    Solver_settings.processors = 4
+    Solver_settings.processors = 7
 
     # Cauchy convergence criteria
     # Could be either LIFT or DRAG
@@ -73,7 +71,7 @@ def Input_data():
 # ------------------------------- FREESTREAM SETTINGS ------------------------------------------------------- #
 #
     Freestream = Data()
-    Freestream.Mach             = np.array([0.21,0.25])
+    Freestream.Mach             = np.array([0.21])
     Freestream.Altitude         = np.array([0,2000])                 # in meters
     Freestream.Angle_of_attack  = np.array([0.0,3.0,5.0])               # in degrees
 
@@ -100,9 +98,11 @@ def Input_data():
         "Point"  : [0.25*2.62,0,0]              # reference point about which the moment is taken
     }
 
+    # Flag to use PARSEC parametrization or to use already existing airfoils
+    Geometry_data.generate = True
+
     segment = Segment()
     segment.tag                = 'section_1'
-    segment.spanwise_location  = 0 
     segment.chord              = 2.62
     segment.Airfoil.files      = {
         "upper" : "main_airfoil_upper_1.dat",
@@ -118,12 +118,44 @@ def Input_data():
                                     "y_suc"      : 0.06302395539,               # y-location of the crest on the suction side
                                     "d2ydx2_suc" : -0.361421420,                # curvature of the crest on the suction side
                                     "th_suc"     : -12.391677695858,            # trailing edge angle on the suction side [deg]
-                                    "yte upper" : 0.002,
-                                    "yte lower" : -0.002
+                                    "yte upper"  : 0.002,
+                                    "yte lower"  : -0.002
     }
-    Geometry_data.Segments.append(segment)
+
+    segment.TrailingEdgeDevice.type = 'Slotted'
+    segment.TrailingEdgeDevice.PARSEC = {
+        "cf_c"       : 0.3,                         # flap chord ratio
+        "ce_c"       : 0.3,                         # conical curve extent ratio wrt the flap chord length
+        "csr_c"      : 0.85,                        # shroud chord ratio 
+        "clip_ext"   : 0.05,                        # shroud lip extent ratio wrt the flap  
+        "r_le_flap"  : 0.01,                        # flap leading edge radius
+        "tc_shr_tip" : 0.003,                       # shroud tip thickness
+        "w_conic"    : 0.5,                         # conical parameter for the suction side of the flap airfoil
+        "delta_f"    : 40,                          # flap deflection [deg]   
+        "x_gap"      : 0.01,                        # x-length gap from the shroud TE (positive value is moving the flap left)
+        "y_gap"      : 0.005,                       # y-length gap from the shroud TE (positive value is moving the flap down)    
+    }  
+
+    segment.TrailingEdgeDevice.files = {
+        "upper surface file" : "flap_airfoil_upper.dat",
+        "lower surface file" : "flap_airfoil_lower.dat",
+        "flap cutout"        : ["main_airfoil_cut1.dat", "main_airfoil_cut2.dat"]
+    }
+
+    segment.LeadingEdgeDevice.type   = 'Droop'
+    segment.LeadingEdgeDevice.PARSEC = {
+        "delta_s"    : 15,              # droop nose deflection [deg]
+        "cs_c"       : 0.10,             # droop nose chord ratio
+        "d_cs_up"    : 0.03,            # droop nose offset from the hinge on the upper surface 
+        "d_cs_low"   : 0.03,            # shroud lip extent ratio wrt the flap  
+        "w_con_seal" : 1.0              # conical parameter for the droop nose seal
+    } 
 
     segment.plot_airfoil = True
+
+    Geometry_data.Segments.append(segment)
+
+
 
 
 # ------------------------------- MESH SETTINGS ---------------------------------------------------------------- #
@@ -135,34 +167,48 @@ def Input_data():
     Mesh_data.meshing    = True
 
     # Mesh type
-    Mesh_data.structured = True
+    Mesh_data.structured = False
 
     # Defined the OS in which Pointwise is used
     # WINDOWS or Linux
     Mesh_data.operating_system = 'Linux'
 
     # Pointwise tclsh directory used in Windows
-    Mesh_data.tclsh_directory =  r"/home/doktorand/Fidelity/Pointwise/Pointwise2022.1" 
+    Mesh_data.tclsh_directory = r"/home/doktorand/Fidelity/Pointwise/Pointwise2022.1" 
 
     # Desired Y+ value
     Mesh_data.Yplus = 1.0
 
     # Define the Glyph template to use for meshing
-    Mesh_data.glyph_file = "mesh_clean_airfoil_SU2.glf"
+    Mesh_data.glyph_file = "mesh_flapped_airfoil_SU2.glf"
 
     # Mesh filename for either the newly generated mesh or an eisting mesh
     Mesh_data.filename = 'su2meshEx.su2'
 
     # Define far-field 
-    Mesh_data.far_field = 100 * Geometry_data.reference_values["Length"]
+    #   min x, max x
+    #   min y, max y
+    #   min z, max z (used only for 3D cases)
+    Mesh_data.far_field = [[-60, 60], [-60 ,60]]
 
 
     Mesh_data.airfoil_mesh_settings = {
-        "LE_spacing"             : 0.001,                       # Airfoil leading edge spacing
-        "TE_spacing"             : 0.0005,                      # Airfoil trailing edge spacing
-        "flap_cluster"           : 0.005,
-        "connector dimensions"   : [200, 200, 8],     #         "connector_dimensions": [200, 120, 150, 150, 70, 25, 8, 8],
-        "number of normal cells" : 230
+        "LE_spacing"                     : 0.001,                               # Airfoil leading edge spacing
+        "TE_spacing"                     : 0.0005,                              # Airfoil trailing edge spacing
+        "LE_flap_spacing"                : 0.001,
+        "TE_flap_spacing"                : 0.0005,
+        "flap_cut_cluster"               : 0.005,                               # Cluster at the flap cutout corner
+        "connector dimensions"           : [200, 120, 150, 150, 70, 25, 8, 8],  #   
+        "near-field refinement radius 1" : 9,
+        "near-field refinement radius 2" : 45,
+        "near-field nodes"               : 100,
+        "far-field connectors"           : 20,
+        "Max TREX layers"                : 100,
+        "near-field boundary decay 0"    : 0.85,
+        "Full TREX layers"               : 60,
+        "TREX growth rate"               : 1.1,
+        "near-field boundary decay 2"    : 0.75,
+        "near-field boundary decay 1"    : 0.85
     }
 
 
@@ -185,7 +231,7 @@ if __name__ == '__main__':
     run_aerodynamic_analysis(Input)
 ```
 
-
 ## Results
-The magnitude of momentum at altitude 2000 m, speed = 0.25 Mach and angle of attack 3 degree.
-![Clean PARSEC airfoil result](./results/Clean_PARSEC_Momentum_Alt2000_MachQuarter_AoA3.jpg)
+
+The magnitude of momentum at altitude 2000 m, speed = 0.21 Mach and angle of attack 3 degree.
+![Flapped PARSEC airfoil result](./results/Flapped_PARSEC_Momentum_Alt2000_Mach21in100_AoA3.jpg)

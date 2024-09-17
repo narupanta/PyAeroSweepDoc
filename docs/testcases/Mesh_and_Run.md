@@ -1,15 +1,13 @@
-# Clean Airfoil CST
+# Mesh and run
 
-Clean Airfoil CST test case is the simulation of the air flow through the clean airfoil (without flaps, just airfoil). CST (Class-Shape Transformation) is one way to define the geometry of the airfoil. For futher information follow this link [CST Airfoil Geometry](https://mdolab-pygeo.readthedocs-hosted.com/en/latest/cst_tutorial.html)
+In the case mesh and run, we use the existing geometry and then we mesh it and run the solver. Therefore, the folder Geometry_files containing the airfoil geometry file .dat is necessary to run this case. 
 
-![CST airfoil](./geometry/cst_airfoil.png)
-
-Steps:
+**Steps:**
 
 1. Setting the input for the simulation
-    * The geometry is defined using CST
+    * Using existing geometry 
 2. In function `run_aerodynamic_analysis`, 
-    1. Generate the file for geometry and mesh the geometry
+    1. Mesh the geometry
     2. Solve using SU2
     3. Read results from the runtime log and save them as csv and vtu
 3. Visualize the result using Paraview
@@ -27,9 +25,10 @@ from Components.Mesh                    import Mesh
 from Run_aerodynamic_analysis import run_aerodynamic_analysis
 
 
+
 def Input_data():
 
-    working_dir   = r"/home/doktorand/Software/PyAeroSweep-Stan-V3/PyAeroSweep/Test_Cases/Clean_airfoil_CST" 
+    working_dir   = r"/home/doktorand/Software/PyAeroSweep-Stan-V3/PyAeroSweep/Test_Cases/Mesh_and_Run" 
 
 # ------------------------------- SOLVER SETTINGS ----------------------------------------------------------- #
 #
@@ -52,7 +51,7 @@ def Input_data():
     Solver_settings.turbulence_model = 'SST'
 
     # Number of processors
-    Solver_settings.processors = 4
+    Solver_settings.processors = 7
 
     # Cauchy convergence criteria
     # Could be either LIFT or DRAG
@@ -100,28 +99,28 @@ def Input_data():
         "Point"  : [0.25*2.62,0,0]              # reference point about which the moment is taken
     }
 
+    # Flag to use PARSEC parametrization or to use already existing airfoils
+    Geometry_data.generate = False
+
     segment = Segment()
     segment.tag                = 'section_1'
     segment.chord              = 2.62
     segment.Airfoil.files      = {
-        "upper" : "main_airfoil_upper_1.dat",
-        "lower" : "main_airfoil_lower_1.dat"
+        "upper" : "main_airfoil_upper_fixed.dat",
+        "lower" : "main_airfoil_lower_fixed.dat"
     }
-    segment.Airfoil.CST = {
-                    "upper" :[0.20095, 0.26864, 0.10933, 0.29307,\
-                              0.12099, 0.21197, 0.18002, 0.18408],                    
-                    "lower" :[-0.20095, 0.05433, -0.46373, 0.25546,\
-                              -0.40375, 0.01032, -0.14109, -0.11217],    
-                    "N1 upper" : 0.5,
-                    "N1 lower" : 0.5,
-                    "N2 upper" : 1.0,
-                    "N2 lower" : 1.0,
-                    "yte upper" : 0.001,
-                    "yte lower" : -0.001 
-}
-    Geometry_data.Segments.append(segment)
+
+    segment.TrailingEdgeDevice.type = 'Slotted'
+    segment.TrailingEdgeDevice.files = {
+        "upper surface file" : "flap_airfoil_upper_fixed.dat",
+        "lower surface file" : "flap_airfoil_lower_fixed.dat",
+        "flap cutout"        : ["main_airfoil_cut1_fixed.dat", "main_airfoil_cut2_fixed.dat"]
+    }
 
     segment.plot_airfoil = True
+
+    Geometry_data.Segments.append(segment)
+
 
 
 # ------------------------------- MESH SETTINGS ---------------------------------------------------------------- #
@@ -133,34 +132,48 @@ def Input_data():
     Mesh_data.meshing    = True
 
     # Mesh type
-    Mesh_data.structured = True
+    Mesh_data.structured = False
 
     # Defined the OS in which Pointwise is used
     # WINDOWS or Linux
     Mesh_data.operating_system = 'Linux'
 
     # Pointwise tclsh directory used in Windows
-    Mesh_data.tclsh_directory =  r"/home/doktorand/Fidelity/Pointwise/Pointwise2022.1" 
+    Mesh_data.tclsh_directory = r"/home/doktorand/Fidelity/Pointwise/Pointwise2022.1" 
 
     # Desired Y+ value
     Mesh_data.Yplus = 1.0
 
     # Define the Glyph template to use for meshing
-    Mesh_data.glyph_file = "mesh_clean_airfoil_SU2.glf"
+    Mesh_data.glyph_file = "mesh_flapped_airfoil_SU2.glf"
 
     # Mesh filename for either the newly generated mesh or an eisting mesh
     Mesh_data.filename = 'su2meshEx.su2'
 
     # Define far-field 
-    Mesh_data.far_field = 100 * Geometry_data.reference_values["Length"]
+    #   min x, max x
+    #   min y, max y
+    #   min z, max z (used only for 3D cases)
+    Mesh_data.far_field = [[-60, 60], [-60 ,60]]
 
 
     Mesh_data.airfoil_mesh_settings = {
-        "LE_spacing"             : 0.001,                       # Airfoil leading edge spacing
-        "TE_spacing"             : 0.0005,                      # Airfoil trailing edge spacing
-        "flap_cluster"           : 0.005,
-        "connector dimensions"   : [200, 200, 8],     #         "connector_dimensions": [200, 120, 150, 150, 70, 25, 8, 8],
-        "number of normal cells" : 230
+        "LE_spacing"                     : 0.001,                               # Airfoil leading edge spacing
+        "TE_spacing"                     : 0.0005,                              # Airfoil trailing edge spacing
+        "LE_flap_spacing"                : 0.001,
+        "TE_flap_spacing"                : 0.0005,
+        "flap_cut_cluster"               : 0.005,                               # Cluster at the flap cutout corner
+        "connector dimensions"           : [200, 120, 150, 150, 70, 25, 8, 8],  #   
+        "near-field refinement radius 1" : 9,
+        "near-field refinement radius 2" : 45,
+        "near-field nodes"               : 100,
+        "far-field connectors"           : 20,
+        "Max TREX layers"                : 100,
+        "near-field boundary decay 0"    : 0.85,
+        "Full TREX layers"               : 60,
+        "TREX growth rate"               : 1.1,
+        "near-field boundary decay 2"    : 0.75,
+        "near-field boundary decay 1"    : 0.85
     }
 
 
@@ -176,13 +189,13 @@ def Input_data():
 
     return Input
 
-
 if __name__ == '__main__':
 
     Input = Input_data()
     run_aerodynamic_analysis(Input)
 ```
 
-## Results
+## Result
+
 The magnitude of momentum at altitude 2000 m, speed = 0.25 Mach and angle of attack 3 degree.
-![Clean CST airfoil result](./results/Clean_CST_Momentum_Alt2000_MachQuarter_AoA3.jpg)
+![Mesh and run result](./results/MeshAndRun_Alt2000_Mach25in100_AoA3.jpg)

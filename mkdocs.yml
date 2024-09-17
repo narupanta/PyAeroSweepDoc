@@ -13,9 +13,6 @@ nav:
   - Installation: installation.md
   - Usage: usage.md
   - Code Strucure:
-    - Core: structure\Core.md
-    - Methods: structure\Methods.md
-    - Components: structure\Components.md
     - Input_Data.py : structure\Input_Data.md
     - Run_aerodynamic_analysis.py: structure\Run_aero.md
     - Geometry Definition: 
@@ -24,7 +21,11 @@ nav:
   - Test Cases:
     - Clean_airfoil_CST: testcases\Clean_airfoil_CST.md
     - Clean_airfoil_Full: testcases\Clean_airfoil_Full.md
-    - Flapped_airfoil_full: testcases\Flapped_airfoil_full.md
+    - Flapped_airfoil_CST: testcases\Flapped_airfoil_CST.md
+    - Flapped_airfoil_CST: testcases\Flapped_airfoil_PARSEC.md
     - Full_3D_Wing: testcases\Full_3D_Wing.md
+    - LE_TE: testcases\LE_TE_flaps.md
+    - Mesh and run: testcases\Mesh_and_Run.md
+    - Only RANS (solver): testcases\Only_RANS.md
   - Others:
     - Others: other.md
