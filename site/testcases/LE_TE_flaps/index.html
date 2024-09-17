@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Flapped_airfoil_full - PyAeroSweep</title>
+    <title>LE_TE - PyAeroSweep</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Flapped_airfoil_full";
-        var mkdocs_page_input_path = "testcases\\Flapped_airfoil_full.md";
+        var mkdocs_page_name = "LE_TE";
+        var mkdocs_page_input_path = "testcases\\LE_TE_flaps.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -53,12 +53,6 @@
               </ul>
               <p class="caption"><span class="caption-text">Code Strucure</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../structure/Core/">Core</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../structure/Methods/">Methods</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../structure/Components/">Components</a>
-                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../structure/Input_Data/">Input_Data.py</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../structure/Run_aero/">Run_aerodynamic_analysis.py</a>
@@ -78,17 +72,23 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Clean_airfoil_Full/">Clean_airfoil_Full</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Flapped_airfoil_full</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../Flapped_airfoil_CST/">Flapped_airfoil_CST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Flapped_airfoil_PARSEC/">Flapped_airfoil_CST</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Full_3D_Wing/">Full_3D_Wing</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">LE_TE</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#inputs">Inputs</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#results">Results</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#explanation">Explanation</a>
+    <li class="toctree-l2"><a class="reference internal" href="#result">Result</a>
     </li>
     </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../Full_3D_Wing/">Full_3D_Wing</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../Mesh_and_Run/">Mesh and run</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Only_RANS/">Only RANS (solver)</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Others</span></p>
@@ -111,7 +111,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">Test Cases</li>
-      <li class="breadcrumb-item active">Flapped_airfoil_full</li>
+      <li class="breadcrumb-item active">LE_TE</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -120,10 +120,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="clean-airfoile-cst">Clean Airfoile CST</h1>
-<p>[Description here]</p>
+                <h1 id="airfoil-including-trailing-edge-device-and-leading-edge-device">Airfoil including trailing edge device and leading edge device</h1>
+<p>Clean Airfoil Full test case is the simulation of the air flow through the clean airfoil (without flaps, just airfoil). In this case, PARSEC airfoil parameterized method is used to create the airfoil geometry.</p>
+<p><img alt="LE + TE airfoil" src="../geometry/LE_TE.png" /></p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>Setting the input for the simulation<ul>
+<li>The geometry is defined using PARSEC</li>
+</ul>
+</li>
+<li>In function <code>run_aerodynamic_analysis</code>, <ol>
+<li>Generate the file for geometry and mesh the geometry</li>
+<li>Solve using SU2</li>
+<li>Read results from the runtime log and save them as csv and vtu</li>
+</ol>
+</li>
+<li>Visualize the result using Paraview</li>
+</ol>
 <h2 id="inputs">Inputs</h2>
-<pre><code class="language-python">
+<pre><code class="language-python">import os
 import numpy as np
 from Core.Data                          import Data
 from Components.Solver                  import Solver
@@ -136,7 +151,7 @@ from Run_aerodynamic_analysis import run_aerodynamic_analysis
 
 def Input_data():
 
-    working_dir   = r&quot;/home/doktorand/Software/PyAeroSweep-Stan-V3/PyAeroSweep/Test_Cases/Clean_airfoil_CST&quot; 
+    working_dir = r&quot;/home/doktorand/Software/PyAeroSweep-Stan-V3/PyAeroSweep/Test_Cases/LE_TE_flaps&quot; 
 
 # ------------------------------- SOLVER SETTINGS ----------------------------------------------------------- #
 #
@@ -209,26 +224,47 @@ def Input_data():
 
     segment = Segment()
     segment.tag                = 'section_1'
+    segment.spanwise_location  = 0 
     segment.chord              = 2.62
     segment.Airfoil.files      = {
         &quot;upper&quot; : &quot;main_airfoil_upper_1.dat&quot;,
         &quot;lower&quot; : &quot;main_airfoil_lower_1.dat&quot;
     }
-    segment.Airfoil.CST = {
-                    &quot;upper&quot; :[0.20095, 0.26864, 0.10933, 0.29307,\
-                              0.12099, 0.21197, 0.18002, 0.18408],                    
-                    &quot;lower&quot; :[-0.20095, 0.05433, -0.46373, 0.25546,\
-                              -0.40375, 0.01032, -0.14109, -0.11217],    
-                    &quot;N1 upper&quot; : 0.5,
-                    &quot;N1 lower&quot; : 0.5,
-                    &quot;N2 upper&quot; : 1.0,
-                    &quot;N2 lower&quot; : 1.0,
-                    &quot;yte upper&quot; : 0.001,
-                    &quot;yte lower&quot; : -0.001 
-}
-    Geometry_data.Segments.append(segment)
+    segment.Airfoil.PARSEC     = {
+                                    &quot;rle&quot;        : 0.0084,                      # Main airfoil LE radius
+                                    &quot;x_pre&quot;      : 0.458080577545180,           # x-location of the crest on the pressure side
+                                    &quot;y_pre&quot;      : -0.04553160030118,           # y-location of the crest on the pressure side  
+                                    &quot;d2ydx2_pre&quot; : 0.554845554794938,           # curvature of the crest on the pressure side  
+                                    &quot;th_pre&quot;     : -9.649803736,                # trailing edge angle on the pressure side [deg]
+                                    &quot;x_suc&quot;      : 0.46036604,                  # x-location of the crest on the suction side 
+                                    &quot;y_suc&quot;      : 0.06302395539,               # y-location of the crest on the suction side
+                                    &quot;d2ydx2_suc&quot; : -0.361421420,                # curvature of the crest on the suction side
+                                    &quot;th_suc&quot;     : -12.391677695858,            # trailing edge angle on the suction side [deg]
+                                    &quot;yte upper&quot;  : 0.002,
+                                    &quot;yte lower&quot;  : -0.002
+    }
+
+    segment.TrailingEdgeDevice.type   = 'Plain'
+    segment.TrailingEdgeDevice.PARSEC = {
+        &quot;delta_f&quot;    : 25,              # flap deflection [deg]
+        &quot;cf_c&quot;       : 0.7,            # flap chord ratio
+        &quot;d_cf_up&quot;    : 0.03,            # flap offset from the hinge on the upper surface 
+        &quot;d_cf_low&quot;   : 0.03,            # shroud lip extent ratio wrt the flap  
+        &quot;w_con_seal&quot; : 0.5              # conical parameter for the flap seal
+    } 
+
+    segment.LeadingEdgeDevice.type   = 'Droop'
+    segment.LeadingEdgeDevice.PARSEC = {
+        &quot;delta_s&quot;    : 25,              # droop nose deflection [deg]
+        &quot;cs_c&quot;       : 0.15,             # droop nose chord ratio
+        &quot;d_cs_up&quot;    : 0.03,            # droop nose offset from the hinge on the upper surface 
+        &quot;d_cs_low&quot;   : 0.03,            # shroud lip extent ratio wrt the flap  
+        &quot;w_con_seal&quot; : 1.0              # conical parameter for the droop nose seal
+    } 
 
     segment.plot_airfoil = True
+
+    Geometry_data.Segments.append(segment)
 
 
 # ------------------------------- MESH SETTINGS ---------------------------------------------------------------- #
@@ -289,26 +325,15 @@ if __name__ == '__main__':
     Input = Input_data()
     run_aerodynamic_analysis(Input)
 </code></pre>
-<p>[describe the input for the simulation here]</p>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="results">Results</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
-<h2 id="explanation">Explanation</h2>
+<h2 id="result">Result</h2>
+<p>The magnitude of momentum at altitude 2000 m, speed = 0.25 Mach and angle of attack 3 degree.
+<img alt="LE + TE airfoil result" src="../results/LETE_Alt2000_Mach25in100_AoA3.jpg" /></p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../Clean_airfoil_Full/" class="btn btn-neutral float-left" title="Clean_airfoil_Full"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../Full_3D_Wing/" class="btn btn-neutral float-right" title="Full_3D_Wing">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Full_3D_Wing/" class="btn btn-neutral float-left" title="Full_3D_Wing"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Mesh_and_Run/" class="btn btn-neutral float-right" title="Mesh and run">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -331,10 +356,10 @@ docs/
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../Clean_airfoil_Full/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../Full_3D_Wing/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../Full_3D_Wing/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../Mesh_and_Run/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

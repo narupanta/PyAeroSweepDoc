@@ -4,7 +4,7 @@ Flapped Airfoil PARSEC test case is the simulation of the air flow through the f
 
 ![Flapped CST airfoil](./geometry/flapped_parsec_airfoil.png)
 
-Steps:
+**Steps:**
 
 1. Setting the input for the simulation
     * The geometry is defined using PARSEC

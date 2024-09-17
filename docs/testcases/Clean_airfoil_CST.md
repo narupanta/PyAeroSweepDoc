@@ -4,7 +4,7 @@ Clean Airfoil CST test case is the simulation of the air flow through the clean 
 
 ![CST airfoil](./geometry/cst_airfoil.png)
 
-Steps:
+**Steps:**
 
 1. Setting the input for the simulation
     * The geometry is defined using CST

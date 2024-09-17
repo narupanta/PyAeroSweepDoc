@@ -1,9 +1,5 @@
 # Code Structure
 
-## Core
-## Methods
-## Components
-
 ## Input_Data.py
 In this file, we can setup the simulation by inputting various kinds of variables such as:
 

@@ -1,6 +1,6 @@
 # run_aerodynamic_analysis(Input) 
 
-Steps
+**Steps:**
 
 1. Unpack all inputs
 
@@ -14,7 +14,7 @@ Steps
 ## run_SU2.py
 
 ### solve()
-Steps
+**Steps:**
 
 1. For each combination of altitudes, angles of attack and mach in freestream setting, firstly check the warmstart condition and retrieve filename using run_SU2_config function
 
@@ -23,3 +23,4 @@ Steps
 3. Run the solver parallelly using MPI, results will be written in SU2_output.log
 
 4. Read results and store it in excel
+
