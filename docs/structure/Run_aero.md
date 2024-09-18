@@ -24,6 +24,8 @@
 
 4. Read results and store it in excel
 
+Code Example of run_aerodynamic_analysis
+
 ```python
 import os
 import shutil
