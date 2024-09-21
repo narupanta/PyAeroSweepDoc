@@ -12,7 +12,8 @@ nav:
   - Home: index.md
   - Installation: installation.md
   - Usage: usage.md
-  - Code Strucure:
+  - Code Structure:
+    - Overview: structure\overview.md
     - Input_Data.py : structure\Input_Data.md
     - Run_aerodynamic_analysis.py: structure\Run_aero.md
     - Geometry Definition: 
